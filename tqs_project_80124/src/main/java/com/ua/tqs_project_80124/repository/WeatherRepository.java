@@ -6,9 +6,9 @@ import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 
-
-public interface WeatherRepository extends MongoRepository<Weather, Integer>{
+public interface WeatherRepository extends MongoRepository<Weather, Long>{
 	
-	List<Weather> findById(int id);
+	List<Weather> findById(long id);
 
+        List<Weather> findByGlobalId(int globalId);
 }

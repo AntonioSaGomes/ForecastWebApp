@@ -9,9 +9,9 @@ import com.ua.tqs_project_80124.model.Weather;
 import com.ua.tqs_project_80124.service.WeatherService;
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -21,6 +21,7 @@ public class UnitTest {
     
     
     private Weather instance;
+    @Autowired
     private WeatherService weatherService;
     
     public UnitTest() {
@@ -29,7 +30,7 @@ public class UnitTest {
     
     @BeforeEach
     public void setUp() {
-    	instance = new Weather(9,10.2,12.3,"20-3-2016");     
+    	instance = new Weather(9l,10.2,12.3,"20-3-2016",1239);     
     }
     
     @AfterEach
@@ -40,6 +41,6 @@ public class UnitTest {
    
    @Test
    public void testPersistence(){
-       assertEquals(instance, weatherService.addWeather(instance));
+        assertEquals(instance, weatherService.addWeather(instance));
    }
 }

@@ -1,5 +1,6 @@
 package com.ua.tqs_project_80124;
 
+import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import com.ua.tqs_project_80124.model.Weather;
 import com.ua.tqs_project_80124.repository.WeatherRepository;
 import com.ua.tqs_project_80124.service.WeatherService;
@@ -28,16 +29,33 @@ import org.json.*;
 @EnableScheduling
 public class TqsProject80124Application implements CommandLineRunner {
     
-	final static RestTemplate restTemplate = new RestTemplate();
+	final  RestTemplate restTemplate = new RestTemplate();
 
         @Autowired
-        private static WeatherService weatherService = new WeatherService();
+        private  WeatherService weatherService;
+        
+        @Autowired
+        private  WeatherRepository weatherRepository;
+        
+        private Constants constants = new Constants();
         
 	public static void main(String[] args) throws IOException {
-		SpringApplication.run(TqsProject80124Application.class, args);
+		SpringApplication.run(TqsProject80124Application.class, args); 
+ 
+        }
+
+        @Override
+        public void run(String... args) throws Exception {
+            weatherService.deleteWeathers();
+            for (int city:constants.consts.values()){
+                consumeWeathers(restTemplate, weatherService,city);
+            }
+        }
+        
+        public void consumeWeathers(RestTemplate restTemplate,WeatherService weatherService,int city){
                 URL url;
                 try {
-                    url = new URL("http://api.ipma.pt/open-data/forecast/meteorology/cities/daily/1010500.json");
+                    url = new URL("http://api.ipma.pt/open-data/forecast/meteorology/cities/daily/" + city +".json");
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
                     con.setRequestMethod("GET");
                     con.setDoOutput(true);
@@ -57,7 +75,8 @@ public class TqsProject80124Application implements CommandLineRunner {
                         double tMin = Double.parseDouble(jsonArray.getJSONObject(i).getString("tMin"));
                         double tMax = Double.parseDouble(jsonArray.getJSONObject(i).getString("tMax"));
                         String date = jsonArray.getJSONObject(i).getString("forecastDate");
-                        Weather weather = new Weather(i,tMin,tMax,date);
+                        Weather weather = new Weather(constants.generateId(),tMin,tMax,date,city);
+                        weather.transformDate(date);
                         System.out.println(weatherService.addWeather(weather));
                     }
 
@@ -65,26 +84,13 @@ public class TqsProject80124Application implements CommandLineRunner {
                     Logger.getLogger(TqsProject80124Application.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ProtocolException ex) {
                 Logger.getLogger(TqsProject80124Application.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(TqsProject80124Application.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-
-        }
-
-        @Override
-        public void run(String... args) throws Exception {
-            consumeWeathers(restTemplate, weatherService);
-        }
-        
-        public static void consumeWeathers(RestTemplate restTemplate,WeatherService weatherService){
-            String url = "http://api.ipma.pt/open-data/forecast/meteorology/cities/daily/1010500.json";
-            final HttpEntity entity = new HttpEntity<String>("");
-            ResponseEntity<Weather> responseEntity = restTemplate.exchange(url, HttpMethod.GET,entity,Weather.class);
-            System.out.println(responseEntity.getBody());
         }
         
         
         public void parseJsonObject(){
-
         }
 
 }
