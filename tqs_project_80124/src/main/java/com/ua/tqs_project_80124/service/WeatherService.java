@@ -3,7 +3,6 @@ package com.ua.tqs_project_80124.service;
 import com.ua.tqs_project_80124.model.Weather;
 import com.ua.tqs_project_80124.repository.WeatherRepository;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
