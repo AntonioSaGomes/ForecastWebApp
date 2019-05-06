@@ -1,6 +1,5 @@
 package com.ua.tqs_project_80124;
 
-import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import com.ua.tqs_project_80124.model.Weather;
 import com.ua.tqs_project_80124.repository.WeatherRepository;
 import com.ua.tqs_project_80124.service.WeatherService;
@@ -17,15 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 import org.json.*;
 
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages={"com.ua.tqs_project_80124"})
 @EnableScheduling
 public class TqsProject80124Application implements CommandLineRunner {
     
@@ -90,7 +86,6 @@ public class TqsProject80124Application implements CommandLineRunner {
         }
         
         
-        public void parseJsonObject(){
-        }
+
 
 }

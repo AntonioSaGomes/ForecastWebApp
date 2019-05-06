@@ -15,40 +15,43 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
     
 @Controller
 public class WeatherController {
     
 	@Autowired
 	private WeatherService service;
+        
         private Constants localidades = new Constants();
+        
         @RequestMapping("/")
         public String welcome(){
             return "Hello World!";
         }
         
-        @GetMapping("/meteorologia/{localidade}")
-        public String getWeatherByLocalidade(@PathVariable String localidade, Model model){
-            for (String local:Constants.consts.keySet()){
-                System.out.println(local + " " + localidade);
-                if (local.equals(localidade)){
-                    model.addAttribute("name",local);
-                    System.out.println(Constants.consts.get(local));
-                    model.addAttribute("weather",service.getWeatherByGlobalID(Constants.consts.get(local)));
-                }
-            }
-            return "home";
+        @GetMapping("/meteorologia")
+        public String getWeatherByLocalidade(@RequestParam String localidade, Model model){
+            String templateName = "home";
+            model.addAttribute("name",localidade);
+            model.addAttribute("weather",service.getWeatherByLocal(localidade));
+            return templateName;
         }
         
 	@PostMapping(value = "/save")
 	public Weather saveWeather(@RequestBody Weather weather) {
 		return service.addWeather(weather);
 	}
-
+        
+        @GetMapping("/cities")
+        public String getAvailableCities(Model model){
+            String templateName = "cities";
+            model.addAttribute("cities",localidades.consts.keySet());
+            return templateName;
+        }
 	@GetMapping("/getWeathers")
 	public List<Weather> findAllWeathers() {
             return service.getWeathers();

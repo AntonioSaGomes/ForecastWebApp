@@ -11,4 +11,5 @@ public interface WeatherRepository extends MongoRepository<Weather, Long>{
 	List<Weather> findById(long id);
 
         List<Weather> findByGlobalId(int globalId);
+        
 }

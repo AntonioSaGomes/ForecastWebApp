@@ -39,8 +39,4 @@ public class UnitTest {
     }
 
    
-   @Test
-   public void testPersistence(){
-        assertEquals(instance, weatherService.addWeather(instance));
-   }
 }
