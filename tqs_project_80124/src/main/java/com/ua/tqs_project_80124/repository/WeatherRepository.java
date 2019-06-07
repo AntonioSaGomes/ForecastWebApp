@@ -1,15 +1,42 @@
 package com.ua.tqs_project_80124.repository;
 
-import com.ua.tqs_project_80124.model.Weather;
+import com.ua.tqs_project_80124.model.WeatherForecast;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
 
+public class WeatherRepository {
+    
+    private List<WeatherForecast> weathersList;
+    
+    public WeatherRepository(){
+        weathersList = new ArrayList<>();
+    }
+    
+    public WeatherForecast save(WeatherForecast weatherList){
+        this.weathersList.add(weatherList);
+        return weatherList;
+    }
+     
+    public WeatherForecast findById(long id){
+        for (WeatherForecast weatherList:weathersList){
+            if (weatherList.getId() == id){
+                return weatherList;
+            }
+        }
+        return weathersList.get(0);
+    }
 
-public interface WeatherRepository extends MongoRepository<Weather, Long>{
-	
-	List<Weather> findById(long id);
-
-        List<Weather> findByGlobalId(int globalId);
-        
+    public WeatherForecast findByGlobalId(long id){
+        for (WeatherForecast weatherList:weathersList){
+            if (weatherList.getGlobalID()== id){
+                return weatherList;
+            }
+        }
+        return weathersList.get(0);
+    }
+    
+    public List<WeatherForecast> findAll(){
+        return weathersList;
+    }
 }

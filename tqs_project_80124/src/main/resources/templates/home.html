@@ -95,6 +95,14 @@ and open the template in the editor.
             width: 60%;
             height: 200%;
         }
+        
+        #previous_day_button{
+            float: left;
+        }
+        
+        #next_day_button{
+            float: right;
+        }
         </style>
     </head>
     <head>
@@ -109,12 +117,10 @@ and open the template in the editor.
 
 </body>
         <body>
-
-       
         <nav class="navbar navbar-inverse">
           <div class="container-fluid">
             <div class="navbar-header">
-              <a class="navbar-brand" href="#">WebSiteName</a>
+              <a class="navbar-brand" href="#">WeatherForecast</a>
             </div>
             <ul class="nav navbar-nav">
               <li class="active"><a href="#">Home</a></li>
@@ -137,7 +143,7 @@ and open the template in the editor.
 
     
         <div class="weather_forecast_container">
-        <p th:text="${name}"> </p>
+        <p th:text="${name}" value="name" id="city_name"> </p>
         <tr th:each="weather : ${weather}">
         <div class="weather_day_container">
             <img src="../static/sunny.png">
@@ -150,10 +156,27 @@ and open the template in the editor.
             <div class="weather_day">
                 <td class="w_day" th:text="Day">
                 <td th:text="${weather.forecastDate}"></td>  
-            </div>   
-          
+            </div>  
+                 
+            <button type="button" onclick="goToPreviousDay()" class="btn btn-default" id="previous_day_button" >
+                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> 
+            </button>
+            <button type="button" onclick="goToNextDay()" class="btn btn-default" id="next_day_button">
+                <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+            </button>
         </tr>
         </div>
         </div>
+            
+        <script>
+
+                function goToPreviousDay(day) {
+                    var city_name = document.getElementById("city_name").value;
+                    window.location = "/metereologia?localidade=city_name"
+                }
+        </script>
     </body>
+    
+    
+    
 </html>

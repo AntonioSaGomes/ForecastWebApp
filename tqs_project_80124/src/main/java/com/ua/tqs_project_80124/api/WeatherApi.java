@@ -5,7 +5,7 @@
  */
 package com.ua.tqs_project_80124.api;
 
-import com.ua.tqs_project_80124.model.Weather;
+import com.ua.tqs_project_80124.model.WeatherForecast;
 import com.ua.tqs_project_80124.service.WeatherService;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -35,7 +35,7 @@ public class WeatherApi {
     
     @RequestMapping(value = "/weathers",method = RequestMethod.GET)
     public ResponseEntity<?>  getAllWeathers() {
-        List <Weather> weathers = weatherService.getWeathers();
+        List <WeatherForecast> weathers = weatherService.getWeathers();
         if (weathers == null) {
             return new ResponseEntity("WeatherForecast not found", HttpStatus.NOT_FOUND);
         }
@@ -44,7 +44,7 @@ public class WeatherApi {
     
     @RequestMapping(value = "/weathers/{localidade}",method = RequestMethod.GET)
     public ResponseEntity<?> getWeatherByLocal(@PathVariable String localidade) {
-        List <Weather> weathers = weatherService.getWeatherByLocal(localidade);
+        WeatherForecast weathers = weatherService.getWeatherForecastByLocal(localidade);
         if (weathers == null) {
             return new ResponseEntity("WeatherForecast with name " + localidade 
                     + " not found", HttpStatus.NOT_FOUND);

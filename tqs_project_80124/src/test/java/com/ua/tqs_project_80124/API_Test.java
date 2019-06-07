@@ -28,7 +28,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class API_Test {
     
     @LocalServerPort
-    private int port=8080;
+    private int port;
     
     private URL base;
     

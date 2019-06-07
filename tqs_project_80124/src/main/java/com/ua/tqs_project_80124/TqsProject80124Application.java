@@ -1,6 +1,7 @@
 package com.ua.tqs_project_80124;
 
 import com.ua.tqs_project_80124.model.Weather;
+import com.ua.tqs_project_80124.model.WeatherForecast;
 import com.ua.tqs_project_80124.repository.WeatherRepository;
 import com.ua.tqs_project_80124.service.WeatherService;
 import java.io.BufferedReader;
@@ -16,13 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 import org.json.*;
 
 
-@SpringBootApplication(scanBasePackages={"com.ua.tqs_project_80124"})
-@EnableScheduling
+@SpringBootApplication()
 public class TqsProject80124Application implements CommandLineRunner {
     
 	final  RestTemplate restTemplate = new RestTemplate();
@@ -30,8 +29,7 @@ public class TqsProject80124Application implements CommandLineRunner {
         @Autowired
         private  WeatherService weatherService;
         
-        @Autowired
-        private  WeatherRepository weatherRepository;
+        private  WeatherRepository weatherRepository = new WeatherRepository();
         
         private Constants constants = new Constants();
         
@@ -42,7 +40,7 @@ public class TqsProject80124Application implements CommandLineRunner {
 
         @Override
         public void run(String... args) throws Exception {
-            weatherService.deleteWeathers();
+           // weatherService.deleteWeathers();
             for (int city:constants.consts.values()){
                 consumeWeathers(restTemplate, weatherService,city);
             }
@@ -67,14 +65,16 @@ public class TqsProject80124Application implements CommandLineRunner {
                     System.out.println(content.toString());
                     JSONObject obj = new JSONObject(content.toString());
                     JSONArray jsonArray = obj.getJSONArray("data");
+                    WeatherForecast weatherList = new WeatherForecast();
                     for (int i = 0; i < jsonArray.length(); i++){
                         double tMin = Double.parseDouble(jsonArray.getJSONObject(i).getString("tMin"));
                         double tMax = Double.parseDouble(jsonArray.getJSONObject(i).getString("tMax"));
                         String date = jsonArray.getJSONObject(i).getString("forecastDate");
                         Weather weather = new Weather(constants.generateId(),tMin,tMax,date,city);
                         weather.transformDate(date);
-                        System.out.println(weatherService.addWeather(weather));
+                        weatherList.addWeather(weather);
                     }
+                    this.weatherService.addWeather(weatherList);
 
                 } catch (MalformedURLException ex) {
                     Logger.getLogger(TqsProject80124Application.class.getName()).log(Level.SEVERE, null, ex);
