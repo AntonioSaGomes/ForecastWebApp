@@ -43,4 +43,11 @@
                 <exec.executable>java</exec.executable>
             </properties>
         </action>
+        <action>
+            <actionName>CUSTOM-runConf</actionName>
+            <displayName>runConf</displayName>
+            <goals>
+                <goal>spring-boot:run</goal>
+            </goals>
+        </action>
     </actions>

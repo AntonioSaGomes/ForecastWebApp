@@ -9,7 +9,7 @@ import com.ua.tqs_project_80124.service.WeatherService;
 import java.net.URL;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class API_Test {
     @Autowired
     private WeatherService weatherService;
     
-    @Before
+    @BeforeAll
     public void setUp() throws Exception {
         this.base = new URL("http://localhost:" + port + "/api");
        
@@ -48,7 +48,7 @@ public class API_Test {
     public void getWeatherLocal() throws Exception {
         String local = "Aveiro";
         ResponseEntity<String> response = template.getForEntity(base.toString() + "/getWeather/" + local, String.class);
-        assertThat(response.getBody(),equalTo(weatherService.getWeatherByLocal(local)));
+        assertThat(response.getBody(),equalTo(weatherService.getWeatherForecastByLocal(local)));
                 
     }
 }

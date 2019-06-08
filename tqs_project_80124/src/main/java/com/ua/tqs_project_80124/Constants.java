@@ -15,30 +15,33 @@ import java.util.Random;
  */
 public class Constants {
     
-    public static Map<String,Integer> consts = new HashMap<>();
-    public static int Aveiro = 1010500;
-    public static int Beja = 1020500;
-    public static int Braga = 1030300;
-    public static int CasteloBranco = 1050200;
-    public static final int Coimbra = 1060300;
-    public static final int Evora = 1070500;
+    public static final Map<String,Integer> consts = new HashMap<>();
+    public static final int AVEIRO = 1010500;
+    public static final int BEJA = 1020500;
+    public static final int BRAGA = 1030300;
+    public static final int CASTELO_BRANCO = 1050200;
+    public static final int COIMBRA = 1060300;
+    public static final int EVORA = 1070500;
+    private static Random random;
     
     public Constants(){
-        consts.put("Aveiro", Aveiro);
-        consts.put("Beja", Beja);
-        consts.put("Braga",Braga);
-        consts.put("CasteloBranco",CasteloBranco);
-        consts.put("Coimbra", Coimbra);
-        consts.put("Evora", Evora);
+        consts.put("Aveiro", AVEIRO);
+        consts.put("Beja", BEJA);
+        consts.put("Braga",BRAGA);
+        consts.put("CasteloBranco",CASTELO_BRANCO);
+        consts.put("Coimbra", COIMBRA);
+        consts.put("Evora", EVORA);
     }
    
     public static long generateId(){
         long hash = 7;
-        Random random = new Random();
+        random = new Random();
         for (int i = 0; i < 6; i++) {
             int r = random.nextInt();
             hash = hash*31 + r;
         }
         return hash;
     }
+    
+   
 }

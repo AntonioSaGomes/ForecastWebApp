@@ -5,12 +5,15 @@
  */
 package com.ua.tqs_project_80124.api;
 
+import com.ua.tqs_project_80124.model.Weather;
 import com.ua.tqs_project_80124.model.WeatherForecast;
 import com.ua.tqs_project_80124.service.WeatherService;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,12 +30,7 @@ public class WeatherApi {
     
     @Autowired
     private WeatherService weatherService;
-    
-    @RequestMapping(value = "/",method = RequestMethod.GET)
-    public String welcome(){
-        return "welcome to the api";
-    }
-    
+
     @RequestMapping(value = "/weathers",method = RequestMethod.GET)
     public ResponseEntity<?>  getAllWeathers() {
         List <WeatherForecast> weathers = weatherService.getWeathers();
@@ -52,4 +50,9 @@ public class WeatherApi {
         return new ResponseEntity<>(weathers, HttpStatus.OK);
     }
     
+    @GetMapping("/home")
+    public String helloWorld() {
+    	return "Hello World";
+    }
 }
+

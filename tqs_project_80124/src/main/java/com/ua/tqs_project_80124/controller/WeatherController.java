@@ -25,9 +25,7 @@ public class WeatherController {
 	@Autowired
 	private WeatherService service;
         
-        private Constants localidades = new Constants();
-        
-        
+        private Constants localidades;
         
         @GetMapping("/meteorologia")
         public String getWeatherByLocalidadeAndDay(@RequestParam String localidade,@RequestParam(value="day",required=false) Integer day, Model model){
@@ -67,8 +65,8 @@ public class WeatherController {
             for (WeatherForecast weatherList:service.getWeathers()){
                 for(Weather weather:weatherList.getWeathers()){
                     JSONObject entity = new JSONObject();
-                    entity.put("tMax",weather.getTMax());
-                    entity.put("tMin",weather.getTMin());
+                    entity.put("tMax",weather.gettMax());
+                    entity.put("tMin",weather.gettMin());
                     entities.add(entity);
                 }
             }
