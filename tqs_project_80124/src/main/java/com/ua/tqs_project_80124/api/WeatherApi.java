@@ -8,7 +8,6 @@ package com.ua.tqs_project_80124.api;
 import com.ua.tqs_project_80124.model.Weather;
 import com.ua.tqs_project_80124.model.WeatherForecast;
 import com.ua.tqs_project_80124.service.WeatherService;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,7 +48,7 @@ public class WeatherApi {
         }
         return new ResponseEntity<>(weathers, HttpStatus.OK);
     }
-    
+
     @GetMapping("/home")
     public String helloWorld() {
     	return "Hello World";

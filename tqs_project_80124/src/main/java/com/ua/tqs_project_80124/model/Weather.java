@@ -75,6 +75,11 @@ public class Weather {
 		this.forecastDate = forecastDate;
 	}
 
+    @Override
+    public String toString() {
+        return "Weather{" + "id=" + id + ", tMin=" + tMin + ", tMax=" + tMax + ", forecastDate=" + forecastDate + ", globalId=" + globalId + '}';
+    }
+
        
 
 }

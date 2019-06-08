@@ -33,6 +33,14 @@ public class Constants {
         consts.put("Evora", EVORA);
     }
    
+    public static String getLocal(int id){
+        for (String local:consts.keySet()){
+            if (id == consts.get(local)){
+                return local;
+            }
+        }
+        return "no city";
+    }
     public static long generateId(){
         long hash = 7;
         random = new Random();

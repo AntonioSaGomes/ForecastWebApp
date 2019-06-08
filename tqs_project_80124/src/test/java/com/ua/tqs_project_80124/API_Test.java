@@ -9,8 +9,8 @@ import com.ua.tqs_project_80124.service.WeatherService;
 import java.net.URL;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -38,17 +38,24 @@ public class API_Test {
     @Autowired
     private WeatherService weatherService;
     
-    @BeforeAll
+    @Before
     public void setUp() throws Exception {
         this.base = new URL("http://localhost:" + port + "/api");
        
     }
     
     @Test
+    public void getWeathers() throws Exception {
+        ResponseEntity<String> response = template.getForEntity(base.toString() + "/weathers/", String.class);
+        assertThat(response.getBody(),equalTo(weatherService.getWeathers().toString()));
+    }
+
+    @Test
     public void getWeatherLocal() throws Exception {
         String local = "Aveiro";
-        ResponseEntity<String> response = template.getForEntity(base.toString() + "/getWeather/" + local, String.class);
-        assertThat(response.getBody(),equalTo(weatherService.getWeatherForecastByLocal(local)));
-                
+        ResponseEntity<String> response = template.getForEntity(base.toString() + "/weathers/" + local, String.class);
+        System.out.println("Response from weatherService: " + weatherService.getWeatherForecastByLocal(local).toString());
+        System.out.println("Response from rest template: " + response.getBody());
+        assertThat(response.getBody(),equalTo(weatherService.getWeatherForecastByLocal(local).toString()));
     }
 }

@@ -5,6 +5,7 @@
  */
 package com.ua.tqs_project_80124.model;
 
+import com.ua.tqs_project_80124.Constants;
 import java.util.ArrayList;
 import lombok.Data;
 import lombok.ToString;
@@ -30,6 +31,7 @@ public class WeatherForecast {
         this.weathers = weatherList;
         this.setId(this.weathers.get(1).getId());
         this.setGlobalID(this.weathers.get(1).getGlobalId());
+        this.local = Constants.getLocal((int)globalID);
     }
     
     public void addWeather(Weather weather){
@@ -66,5 +68,12 @@ public class WeatherForecast {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+    public WeatherForecast(ArrayList<Weather> weathers, String local, Long id, int globalID) {
+        this.weathers = weathers;
+        this.local = local;
+        this.id = id;
+        this.globalID = globalID;
+    }
     
 }
