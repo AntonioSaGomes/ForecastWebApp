@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ua.tqs_project_80124.model;
+package com.ua.tqs_project_80124;
 
-import com.ua.tqs_project_80124.Constants;
 import java.util.ArrayList;
 import lombok.Data;
 import lombok.ToString;

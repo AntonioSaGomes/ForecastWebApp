@@ -1,6 +1,5 @@
-package com.ua.tqs_project_80124.repository;
+package com.ua.tqs_project_80124;
 
-import com.ua.tqs_project_80124.model.WeatherForecast;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -5,7 +5,6 @@
  */
 package com.ua.tqs_project_80124;
 
-import com.ua.tqs_project_80124.service.WeatherService;
 import java.net.URL;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -18,7 +17,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-
+import com.ua.tqs_project_80124.WeatherService;
 /**
  *
  * @author sagomes

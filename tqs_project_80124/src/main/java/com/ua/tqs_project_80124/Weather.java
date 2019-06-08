@@ -1,4 +1,4 @@
-package com.ua.tqs_project_80124.model;
+package com.ua.tqs_project_80124;
 
 
 import java.text.DateFormat;

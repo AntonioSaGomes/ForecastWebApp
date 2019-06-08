@@ -1,9 +1,5 @@
-package com.ua.tqs_project_80124.controller;
+package com.ua.tqs_project_80124;
 
-import com.ua.tqs_project_80124.Constants;
-import com.ua.tqs_project_80124.model.Weather;
-import com.ua.tqs_project_80124.model.WeatherForecast;
-import com.ua.tqs_project_80124.service.WeatherService;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONObject;
@@ -25,7 +21,6 @@ public class WeatherController {
 	@Autowired
 	private WeatherService service;
         
-        private Constants localidades;
         
         @GetMapping("/meteorologia")
         public String getWeatherByLocalidadeAndDay(@RequestParam String localidade,@RequestParam(value="day",required=false) Integer day, Model model){
@@ -49,7 +44,7 @@ public class WeatherController {
         @GetMapping("/cities")
         public String getAvailableCities(Model model){
             String templateName = "cities";
-            model.addAttribute("cities",localidades.consts.keySet());
+            model.addAttribute("cities",Constants.consts.keySet());
             return templateName;
         }
         
@@ -75,7 +70,6 @@ public class WeatherController {
 
         @GetMapping("/")
         public String home(Model model){
-            System.out.print(service.getWeathers());
             model.addAttribute("weather",service.getWeathers().get(0).getWeathers().get(0));
             return "home";
         }

@@ -15,7 +15,7 @@ import java.util.Random;
  */
 public class Constants {
     
-    public static final Map<String,Integer> consts = new HashMap<>();
+    protected static final Map<String,Integer> consts = new HashMap<>();
     public static final int AVEIRO = 1010500;
     public static final int BEJA = 1020500;
     public static final int BRAGA = 1030300;
@@ -24,7 +24,7 @@ public class Constants {
     public static final int EVORA = 1070500;
     private static Random random;
     
-    public Constants(){
+    private Constants(){
         consts.put("Aveiro", AVEIRO);
         consts.put("Beja", BEJA);
         consts.put("Braga",BRAGA);
@@ -34,9 +34,9 @@ public class Constants {
     }
    
     public static String getLocal(int id){
-        for (String local:consts.keySet()){
-            if (id == consts.get(local)){
-                return local;
+        for (Map.Entry<String, Integer> entry:consts.entrySet()){
+            if (id == entry.getValue()){
+                return entry.getKey();
             }
         }
         return "no city";

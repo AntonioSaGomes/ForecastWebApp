@@ -1,10 +1,7 @@
-package com.ua.tqs_project_80124.service;
+package com.ua.tqs_project_80124;
 
-import com.ua.tqs_project_80124.Constants;
 import static com.ua.tqs_project_80124.Constants.consts;
-import com.ua.tqs_project_80124.model.Weather;
-import com.ua.tqs_project_80124.model.WeatherForecast;
-import com.ua.tqs_project_80124.repository.WeatherRepository;
+
 import java.util.List;
 
 

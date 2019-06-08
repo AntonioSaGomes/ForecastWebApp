@@ -5,10 +5,6 @@
  */
 package com.ua.tqs_project_80124;
 
-import com.ua.tqs_project_80124.model.Weather;
-import com.ua.tqs_project_80124.model.WeatherForecast;
-import com.ua.tqs_project_80124.repository.WeatherRepository;
-import com.ua.tqs_project_80124.service.WeatherService;
 import java.util.ArrayList;
 import static org.hamcrest.CoreMatchers.equalTo;
 import org.junit.Before;
