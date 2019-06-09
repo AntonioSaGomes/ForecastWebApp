@@ -168,11 +168,12 @@ and open the template in the editor.
         </div>
         </div>
             
-        <script>
-
-                function goToPreviousDay(day) {
+            <script >
+                function goToPreviousDay() {
                     var city_name = document.getElementById("city_name").value;
-                    window.location = "/metereologia?localidade=city_name"
+                    console.log(city_name);
+                    
+                    window.location = "/metereologia?localidade="+city_name;
                 }
         </script>
     </body>

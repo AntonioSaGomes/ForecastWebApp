@@ -53,8 +53,6 @@ public class API_Test {
     public void getWeatherLocal() throws Exception {
         String local = "Aveiro";
         ResponseEntity<String> response = template.getForEntity(base.toString() + "/weathers/" + local, String.class);
-        System.out.println("Response from weatherService: " + weatherService.getWeatherForecastByLocal(local).toString());
-        System.out.println("Response from rest template: " + response.getBody());
         assertThat(response.getBody(),equalTo(weatherService.getWeatherForecastByLocal(local).toString()));
     }
 }

@@ -71,6 +71,7 @@ public class WeatherController {
         @GetMapping("/")
         public String home(Model model){
             model.addAttribute("weather",service.getWeathers().get(0).getWeathers().get(0));
+            model.addAttribute("name","Aveiro");
             return "home";
         }
         

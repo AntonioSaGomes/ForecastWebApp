@@ -9,24 +9,32 @@ import java.util.ArrayList;
 import static org.hamcrest.CoreMatchers.equalTo;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import static org.junit.Assert.assertThat;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  *
  * @author sagomes
  */
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class UnitTesting {
     
     private WeatherForecast weatherForecast;
-    private WeatherRepository weatherRepository;
     private ArrayList<Weather> weathers;
     private ArrayList<WeatherForecast> weatherForecasts;
     
     @Autowired
     private WeatherService weatherService;
     
+    @Autowired
+    private WeatherRepository weatherRepository;
+
     
     @Before
     public void setUp(){
@@ -34,21 +42,20 @@ public class UnitTesting {
         weatherForecasts = new ArrayList<>();
         weathers.add(new Weather(1L,2,3,"12-06-2019",9));
         weatherForecast = new WeatherForecast(weathers, "Aveiro", 1L, 8);
-        weatherRepository = new WeatherRepository();
-        weatherRepository.save(weatherForecast);
+        weatherForecasts.add(weatherForecast);
 
     }
     
+
+    
     @Test
     public void testSavingWeatherForecast (){
-        assertThat(weatherForecast,equalTo(weatherRepository.save(weatherForecast)));
+        assertThat(weatherForecast,equalTo(weatherService.addWeather(weatherForecast)));
     }
     
     @Test
     public void weathersRepoSize(){
         assertThat(weatherRepository.findAll().size(),equalTo(1));
-        weatherRepository.save(weatherForecast);
-        assertThat(weatherRepository.findAll().size(),equalTo(2));
     }
     
 

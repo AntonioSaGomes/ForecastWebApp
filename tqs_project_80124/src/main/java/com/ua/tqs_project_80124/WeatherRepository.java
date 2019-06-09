@@ -2,8 +2,9 @@ package com.ua.tqs_project_80124;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class WeatherRepository {
     
     private List<WeatherForecast> weathersList;

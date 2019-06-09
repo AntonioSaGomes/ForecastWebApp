@@ -3,6 +3,7 @@ package com.ua.tqs_project_80124;
 import static com.ua.tqs_project_80124.Constants.consts;
 
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 import org.springframework.stereotype.Service;
@@ -10,12 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class WeatherService {
 
-	
-	private  WeatherRepository repository  =  new WeatherRepository();
+	@Autowired
+	private  WeatherRepository repository;
 	
 	public WeatherForecast addWeather(WeatherForecast weatherList) {
-            System.out.println(weatherList);
-            return repository.save(weatherList);
+        System.out.println(weatherList);
+        return repository.save(weatherList);
 	}
 
 	public List<WeatherForecast> getWeathers() {

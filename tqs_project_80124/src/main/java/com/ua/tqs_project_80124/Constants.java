@@ -15,7 +15,7 @@ import java.util.Random;
  */
 public class Constants {
     
-    protected static final Map<String,Integer> consts = new HashMap<>();
+    public static final Map<String,Integer> consts = new HashMap<>();
     public static final int AVEIRO = 1010500;
     public static final int BEJA = 1020500;
     public static final int BRAGA = 1030300;
@@ -24,7 +24,7 @@ public class Constants {
     public static final int EVORA = 1070500;
     private static Random random;
     
-    private Constants(){
+    Constants(){
         consts.put("Aveiro", AVEIRO);
         consts.put("Beja", BEJA);
         consts.put("Braga",BRAGA);

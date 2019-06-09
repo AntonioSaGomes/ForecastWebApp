@@ -24,7 +24,10 @@ public class TqsProject80124Application implements CommandLineRunner {
         @Autowired
         private  WeatherService weatherService;
         
+        @Autowired
+        private WeatherRepository weatherRepository;
         
+        private Constants constants = new Constants();
         
 	public static void main(String[] args) throws IOException {
 		SpringApplication.run(TqsProject80124Application.class, args); 
@@ -33,7 +36,7 @@ public class TqsProject80124Application implements CommandLineRunner {
 
         @Override
         public void run(String... args) throws Exception {
-            for (int city:Constants.consts.values()){
+            for (int city:constants.consts.values()){
                 consumeWeathers(city);
             }
         }
