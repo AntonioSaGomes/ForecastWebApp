@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class SeleniumTest {
   
@@ -25,7 +25,7 @@ public class SeleniumTest {
 
   @Before
   public void setUp() throws Exception {
-    driver = new FirefoxDriver();
+    WebDriver driver = new ChromeDriver();
     setBaseUrl("https://www.katalon.com/");
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
