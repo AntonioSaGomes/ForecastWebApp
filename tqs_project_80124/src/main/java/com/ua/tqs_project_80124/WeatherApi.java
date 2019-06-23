@@ -46,9 +46,5 @@ public class WeatherApi {
         return new ResponseEntity<>(weathers.toString(), HttpStatus.OK);
     }
 
-    @GetMapping("/home")
-    public String helloWorld() {
-    	return "Hello World";
-    }
 }
 

@@ -50,4 +50,21 @@
                 <goal>spring-boot:run</goal>
             </goals>
         </action>
+        <action>
+            <actionName>CUSTOM-sonarConf</actionName>
+            <displayName>sonarConf</displayName>
+            <goals>
+                <goal>sonar:sonar</goal>
+                <goal>clean</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-clean-sonar</actionName>
+            <displayName>clean-sonar</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>deploy</goal>
+                <goal>sonar:sonar</goal>
+            </goals>
+        </action>
     </actions>

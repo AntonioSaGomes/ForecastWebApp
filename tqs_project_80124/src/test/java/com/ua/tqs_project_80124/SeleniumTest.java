@@ -1,14 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ua.tqs_project_80124;
-
-/**
- *
- * @author sagomes
- */
 
 import java.util.concurrent.TimeUnit;
 import org.junit.*;
@@ -17,7 +7,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class SeleniumTest {
-  
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -25,24 +14,34 @@ public class SeleniumTest {
 
   @Before
   public void setUp() throws Exception {
-    WebDriver driver = new ChromeDriver();
-    setBaseUrl("https://www.katalon.com/");
+    driver = new ChromeDriver();
+    baseUrl = "https://www.katalon.com/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 
   @Test
-  public void testUntitledTestCase() throws Exception {
-    driver.get("http://localhost:8080/");
-    driver.findElement(By.linkText("Cities")).click();
+  public void testSelenium() throws Exception {
+    driver.get("http://localhost:8082/");
+    driver.findElement(By.xpath("//button[@id='next_day_button']/span")).click();
+    driver.findElement(By.xpath("//button[@id='next_day_button']/span")).click();
+    driver.findElement(By.xpath("//button[@id='next_day_button']/span")).click();
+    driver.findElement(By.xpath("//button[@id='previous_day_button']/span")).click();
+    driver.findElement(By.name("localidade")).click();
+    driver.findElement(By.name("localidade")).clear();
+    driver.findElement(By.name("localidade")).sendKeys("Porto");
+    driver.findElement(By.xpath("//button[@id='next_day_button']/span")).click();
     driver.findElement(By.name("localidade")).click();
     driver.findElement(By.name("localidade")).clear();
     driver.findElement(By.name("localidade")).sendKeys("Lisboa");
-    driver.findElement(By.name("localidade")).sendKeys(Keys.ENTER);
+    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Cities'])[1]/following::i[1]")).click();
+    driver.findElement(By.xpath("//button[@id='next_day_button']/span")).click();
+    driver.findElement(By.xpath("//button[@id='next_day_button']/span")).click();
     driver.findElement(By.name("localidade")).click();
     driver.findElement(By.name("localidade")).clear();
-    driver.findElement(By.name("localidade")).sendKeys("Aveiro");
+    driver.findElement(By.name("localidade")).sendKeys("Porto");
     driver.findElement(By.name("localidade")).sendKeys(Keys.ENTER);
-    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Day07 Junho'])[1]/following::span[2]")).click();
+    driver.findElement(By.id("next_day_button")).click();
+    driver.findElement(By.id("next_day_button")).click();
   }
 
   @After
@@ -86,12 +85,4 @@ public class SeleniumTest {
       acceptNextAlert = true;
     }
   }
-
-	public String getBaseUrl() {
-		return baseUrl;
-	}
-	
-	public void setBaseUrl(String baseUrl) {
-		this.baseUrl = baseUrl;
-	}
 }

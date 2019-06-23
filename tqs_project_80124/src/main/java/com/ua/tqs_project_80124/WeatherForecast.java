@@ -26,11 +26,12 @@ public class WeatherForecast {
         weathers = new ArrayList<>();
     }
     
-    public void saveWeathers(ArrayList<Weather> weatherList){
+    public WeatherForecast saveWeathers(ArrayList<Weather> weatherList){
         this.weathers = weatherList;
         this.setId(this.weathers.get(1).getId());
         this.setGlobalID(this.weathers.get(1).getGlobalId());
         this.local = Constants.getLocal((int)globalID);
+        return this;
     }
     
     public void addWeather(Weather weather){

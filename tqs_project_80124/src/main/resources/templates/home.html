@@ -103,10 +103,13 @@ and open the template in the editor.
         #next_day_button{
             float: right;
         }
+        #day_value{
+            visibility: hidden;
+        }
+
         </style>
     </head>
     <head>
-  <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -127,7 +130,7 @@ and open the template in the editor.
               <li><a href="/cities">Cities</a></li>
               <li><a href="#">Page 2</a></li>
             </ul>
-            <form class="navbar-form navbar-left" action="/meteorologia ">
+            <form class="navbar-form navbar-left" action="/metereologia ">
               <div class="input-group">
                 <input type="text" class="form-control" placeholder="City..." name="localidade">
                 <div class="input-group-btn">
@@ -144,17 +147,18 @@ and open the template in the editor.
     
         <div class="weather_forecast_container">
         <p th:text="${name}" value="name" id="city_name"> </p>
+        <p th:text="${day}" id="day_value">
         <tr th:each="weather : ${weather}">
         <div class="weather_day_container">
-            <img src="../static/sunny.png">
+            <img src="../static/sunny.png" th:src="@{sunny.png}">
             <div class="weather_tMax">
-                <td class="tMax" th:text=Máxima>
+                <td class="tMax">Máxima: </td>
                 <td th:text="${weather.tMax}"></td>
             <div class="weather_tMin">
-                <td class="tMin" th:text=Minima>
+                <td class="tMin"> Minima: </td>
                 <td th:text="${weather.tMin}"></td>  
             <div class="weather_day">
-                <td class="w_day" th:text="Day">
+                <td class="w_day" >Day: </td>
                 <td th:text="${weather.forecastDate}"></td>  
             </div>  
                  
@@ -168,13 +172,23 @@ and open the template in the editor.
         </div>
         </div>
             
-            <script >
-                function goToPreviousDay() {
-                    var city_name = document.getElementById("city_name").value;
-                    console.log(city_name);
-                    
-                    window.location = "/metereologia?localidade="+city_name;
+        <script th:inline="javascript">
+            var city_name =/*[[${name}]]*/ 'Aveiro'
+            var day = parseInt(/*[[${day}]]*/)
+            function goToPreviousDay() {
+                if(day >0){
+                    day = day - 1;
                 }
+                console.log(day);
+                window.location = "http://localhost:8082/metereologia?localidade="+city_name+"&day="+day;
+            }
+                
+            function goToNextDay() {
+                day = day + 1;
+                console.log(day);
+                window.location = "http://localhost:8082/metereologia?localidade="+city_name+"&day="+day;
+            }
+            
         </script>
     </body>
     

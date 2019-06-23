@@ -15,13 +15,16 @@ import java.util.Random;
  */
 public class Constants {
     
-    public static final Map<String,Integer> consts = new HashMap<>();
+    protected static final Map<String,Integer> consts = new HashMap<>();
     public static final int AVEIRO = 1010500;
     public static final int BEJA = 1020500;
     public static final int BRAGA = 1030300;
     public static final int CASTELO_BRANCO = 1050200;
     public static final int COIMBRA = 1060300;
     public static final int EVORA = 1070500;
+    public static final int LISBOA = 1110600;
+    public static final int PORTO = 1131200;
+
     private static Random random;
     
     Constants(){
@@ -31,6 +34,8 @@ public class Constants {
         consts.put("CasteloBranco",CASTELO_BRANCO);
         consts.put("Coimbra", COIMBRA);
         consts.put("Evora", EVORA);
+        consts.put("Porto", PORTO);
+        consts.put("Lisboa", LISBOA);
     }
    
     public static String getLocal(int id){
@@ -41,6 +46,7 @@ public class Constants {
         }
         return "no city";
     }
+    
     public static long generateId(){
         long hash = 7;
         random = new Random();

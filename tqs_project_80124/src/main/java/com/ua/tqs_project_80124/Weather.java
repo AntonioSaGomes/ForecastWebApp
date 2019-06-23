@@ -14,7 +14,9 @@ public class Weather {
         private double tMax;
         private String forecastDate;
         private int globalId;
-        
+
+       public Weather(){}
+       
        public int getGlobalId() {
 			return globalId;
 		}

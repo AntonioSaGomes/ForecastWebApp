@@ -22,16 +22,17 @@ public class WeatherController {
 	private WeatherService service;
         
         
-        @GetMapping("/meteorologia")
+        @GetMapping("/metereologia")
         public String getWeatherByLocalidadeAndDay(@RequestParam String localidade,@RequestParam(value="day",required=false) Integer day, Model model){
             String templateName = "home";
-            model.addAttribute("name",localidade);
-            if (day == null){
+            if (day == null ){
                 day = 0;
             }
             if (day>4){
                 day=4;
             }
+            model.addAttribute("name",localidade);
+            model.addAttribute("day",day);
             model.addAttribute("weather",service.getWeatherForecastByLocal(localidade).getWeathers().get(day));
             return templateName;
         }
@@ -72,6 +73,7 @@ public class WeatherController {
         public String home(Model model){
             model.addAttribute("weather",service.getWeathers().get(0).getWeathers().get(0));
             model.addAttribute("name","Aveiro");
+            model.addAttribute("day",0);
             return "home";
         }
         

@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.client.RestTemplate;
 import org.json.*;
 
 
@@ -64,9 +63,11 @@ public class TqsProject80124Application implements CommandLineRunner {
                         double tMax = Double.parseDouble(jsonArray.getJSONObject(i).getString("tMax"));
                         String date = jsonArray.getJSONObject(i).getString("forecastDate");
                         Weather weather = new Weather(Constants.generateId(),tMin,tMax,date,city);
+                        
                         weather.transformDate(date);
                         weatherList.addWeather(weather);
                     }
+                    weatherList.setLocal(Constants.getLocal(city));
                     this.weatherService.addWeather(weatherList);
 
                 } catch (MalformedURLException ex) {
@@ -79,6 +80,7 @@ public class TqsProject80124Application implements CommandLineRunner {
         }
 
 
+        
         
         
 
